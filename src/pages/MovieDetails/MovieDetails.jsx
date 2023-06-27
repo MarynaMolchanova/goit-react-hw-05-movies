@@ -3,6 +3,9 @@ import { useEffect, Suspense, useState } from 'react';
 import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { Links, FilmDesc } from './MovieDetails.styled';
 
+const defaultPicture =
+  'https://kartinkof.club/uploads/posts/2022-12/1670493543_kartinkof-club-p-kartinki-net-8.jpg';
+
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(0);
@@ -18,7 +21,9 @@ const MovieDetails = () => {
         const movie = await fetchMovieById(id);
 
         setMovie({
-          imgUrl: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+          imgUrl: movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+            : defaultPicture,
 
           rating: Math.floor(movie.vote_average * 10),
           genres: movie.genres.map(genre => genre.name).join(' '),
