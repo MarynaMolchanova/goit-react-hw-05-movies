@@ -11,9 +11,7 @@ export const fetchTrendingMovies = () => {
 export const fetchMovieById = id => {
   return fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=${KEY}&language=en-US`
-  )
-    .then(res => res.json())
-    .then(data => data);
+  ).then(res => res.json());
 };
 
 export const fetchMovieCast = id => {

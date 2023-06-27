@@ -5,7 +5,7 @@ import { Links, FilmDesc } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState(0);
   const location = useLocation();
 
   const goBackLink = location.state?.from ?? '/movie';
@@ -33,6 +33,7 @@ const MovieDetails = () => {
 
     fetchMovie(movieId);
   }, [movieId]);
+  if (!movie) return;
 
   return (
     <main>
